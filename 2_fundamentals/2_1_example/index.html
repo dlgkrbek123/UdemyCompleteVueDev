@@ -5,7 +5,25 @@
   <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-  <div id="app">{{ firstName }}</div>
+  <div id="app" v-cloak>
+    <p>{{ fullName }}</p>
+    <p>{{ typeof age }}</p>
+    <p><a :href="url" target="_blank">Google</a></p>
+    <hr>
+
+    <label>First Name</label>
+    <input type="text" v-model="firstName" />
+    <label>Middle Name</label>
+    <input type="text" @keyup.enter="updateMiddleName" />
+    <label>Last Name</label>
+    <input type="text" :value='lastName' @input.prevent="updateLastName('joon', $event)" />
+
+    <label for="">Age</label>
+    <input type="number" v-model.number="age">
+    <button v-on:click="increment">Increment Age</button>
+    <button v-on:click="age--">Decrement Age</button>
+  </div>
+
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="app.js"></script>
 </body>

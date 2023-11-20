@@ -1,0 +1,125 @@
+-------------------------------------------------------------------------------------------
+
+directives
+=> 엘리먼트의 행동을 바꿀수있는 attribute
+=> 브라우져 입장에서는 attribute인데, vue는 directive로 인식
+
+v-cloak
+=> 템플릿은 스크립트가 로드될때까지 알맞게 노출되지 않음
+=> 마운트되어야 노출시킴
+
+ <div v-cloak></div>
+
+ [v-cloak] {
+   display: none;
+ }
+
+-------------------------------------------------------------------------------------------
+
+v-model
+=> input에 data를 연결
+=> 수정시 data에 반영되며 리렌더링
+=> 2-way data binding을 구현 (v-bind + v-on)
+  => 문서내 데이터가 수정되면 데이터도 수정됨
+  => 데이터가 수정되면 문서내 데이터도 수정됨
+
+ <input type="text" v-model="firstName" />
+ <input type="text" v-model="lastName" />
+
+-------------------------------------------------------------------------------------------
+
+v-bind
+=> html attribute를 동적으로 적용
+
+ <p><a v-bind:href="url" target="_blank">Google</a></p>
+ <p><a :href="url" target="_blank">Google</a></p>
+
+:class
+=> class를 가변적으로 추가 가능
+=> computed 활용하면 간결해져서 좋음
+=> 배열로 사용시 객체나 문자열 전달
+
+ <div class="circle" :class="{ purple: isPurple }">
+ <div class="circle" :class="[classA, classB]">
+
+
+:style
+=> style 직접 binding
+=> 객체 or 객체 배열을 전달
+
+ <div :style="{ 
+   width: size + 'px',
+   height: size + 'px',
+   'line-height': size + 'px'
+ }">
+ </div>
+
+-------------------------------------------------------------------------------------------
+
+v-on
+=> 이벤트 핸들러 부착
+=> 메소드명 or 스크립트
+=> $event를 이용해 이벤트 객체를 넘길 수 있다.
+=> event modifer를 사용해 이벤트 처리 방식을 변경
+=> key modifer로 키보드 이벤트에 대한 처리방식을 변경
+
+ <button v-on:click="increment">Increment Age</button>
+ <button @click="age--">Decrement Age</button>
+
+-------------------------------------------------------------------------------------------
+
+v-if, v-else-if, v-else
+=> 조건부 렌더링
+=> 조건에 표현식 입력
+=> template태그는 Fragment와 유사하다
+
+ <p v-if="mode == 1">1</p>
+ <p v-else-if="mode == 2">2</p>
+ <p v-else>v-else</p>
+
+
+v-show
+=> v-if와 비슷한데 style="display: none;"으로 동작
+=> template과 같이 사용 불가
+ 
+ <p v-show="mode === 1">v-else</p>
+
+-------------------------------------------------------------------------------------------
+
+v-for
+=> 리스트 렌더링을 수행
+=> 배열 뿐 아니라 객체에도 적용가능 
+=> :key 바인딩을 사용
+
+ <ul>
+   <li v-for="bird in birds" :class="bird">{{ bird }}</li>
+ </ul>
+
+ <ul>
+   <li v-for="(bird, index) in birds" :class="bird">{{ bird }} - {{ index }}</li>
+ </ul>
+
+ <ol>
+   <li v-for="person in people" :class="{[person.age] : true }">
+     <div>{{person.name}}</div>
+     <div>{{person.age}}</div>
+   </li>
+ </ol>
+
+ <ol>
+   <li v-for="person in people" :class="{[person.age] : true }">
+     <div v-for="(value, key, index) in person">
+       {{key}}: {{value}} - {{index}}
+     </div>
+   </li>
+ </ol>
+
+-------------------------------------------------------------------------------------------
+
+v-html
+=> 문자열을 html으로 삽입
+=> __dangerouslySetInnerHTML이랑 동일
+
+ <p v-html="raw_url"></p>
+
+-------------------------------------------------------------------------------------------
