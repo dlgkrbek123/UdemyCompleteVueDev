@@ -1,0 +1,37 @@
+<template>
+  <div>
+    <button type="button" @click="onClickAge">Update Age</button>
+    <button type="button" @click="ageChangeFn(3)">Update Age CB</button>
+    <p>The user is {{ age }} years old</p>
+    <p>{{ ageDoubled }}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'User',
+  props: {
+    age: {
+      type: Number,
+      required: true,
+      default: 20,
+      // type: [Number, String] 복수타입
+    },
+    ageChangeFn: Function,
+  },
+  emits: ['age-change'],
+  computed: {
+    ageDoubled() {
+      return this.age * 2;
+    },
+  },
+  methods: {
+    onClickAge() {
+      // this.$emit('age-change');
+      this.$emit('age-change', 3);
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped></style>

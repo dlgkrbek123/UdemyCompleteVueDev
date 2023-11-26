@@ -26,3 +26,104 @@ vm.mount("#app");
 <hello></hello>
 
 ---------------------------------
+
+create-vue 패키지로 보일러 플레이팅
+=> vite, vue, postcss로 번들링 설정까지 처리
+
+> npm init vue@2
+
+---------------------------------
+
+*.vue로 싱글파일 컴포넌트를 정의
+
+=> <script>를 이용해 컴포넌트의 필요부분 정의
+
+ <script>
+import Greeting from '@/components/Greeting.vue';
+
+ export default {
+   name: 'App',
+   components: {
+     Greeting,
+   },
+   data() {
+     return {
+       msg: 'Hello World!',
+     };
+   },
+ };
+ </script>
+
+=> <template>을 이용해 렌더링될 템플릿 정의
+
+ <template>
+   <p>{{ msg }}</p>
+ </template>
+
+=> <style>을 이용해 템플릿에 적용할 스타일 적용
+=> scoped를 통해 스타일이 현재 템플릿에만 적용
+=> scoped 사용시 요소에 dataset을 설정해서 
+   선택적으로 스타일 적용
+
+---------------------------------
+
+props
+=> 부모 컴포넌트가 자식 컴포넌트에 전달하는 데이터
+=> :로 바인드해서 전달
+=> 받는 자식컴포넌트에서 props를 정의해야함
+
+<User :age="age" />
+
+<script>
+export default {
+  name: 'User',
+  props: ['age'],
+};
+</script>
+
+
+=> 자식컴포넌트에서 props 업데이트
+=> emitting events를 해서 수행
+
+ <User :age="age" @age-change="age++" />
+
+ <script>
+ export default {
+   name: 'User',
+   props: ['age'],
+   emits: ['age-change'],
+   computed: {
+     ageDoubled() {
+       return this.age * 2;
+     },
+   },
+   methods: {
+     onClickAge() {
+       // this.$emit('age-change');
+       this.$emit('age-change', 3);
+     },
+   },
+ };
+ </script>
+
+
+=> props를 validation하려면 props를
+   객체로 받아야 한다.
+=> 실패시 console.warn()으로 소심하게 노출됨
+
+ export default {
+   name: 'User',
+   props: {
+     age: {
+       type: Number, // type: [Number, String] 복수타입
+       required: true,
+       // default: 20, => required가 아닐 떄 사용가능
+       validator(value) {
+         return value < 130;
+       }
+     },
+   },
+ };
+ </script>
+
+---------------------------------
