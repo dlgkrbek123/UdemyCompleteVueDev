@@ -1,0 +1,39 @@
+---------------------------------
+
+vue는 lifecycle hooks를 지원
+생애주기는 아래와 같다.
+
+마운트 과정
+  1. mount()
+    !! beforeCreate  !!
+  2. data와 methods를 초기화
+  3. 인스턴스 생성 완료
+    !! created       !!
+  4. 템플릿 컴파일링
+    !! beforeMount   !!
+  5. 컴파일 결과 적용
+    !! mounted       !!
+
+
+beforeCreate => 인스턴스값 초기화 전임
+created      => data 및 methods 접근 가능
+beforeMount  => this.$el에 접근 불가
+mounted      => this.$el에도 접근가능
+
+---------------------------------
+
+업데이트
+  1. data changes
+    !! beforeUpdate !!
+  2. data 변경을 적용
+    !! updated      !!
+
+---------------------------------
+
+언마운트
+  1. vm.unmount
+    !! beforeUnmount !!
+  2. 인스턴스 destroyed
+    !! unmounted     !!
+
+---------------------------------

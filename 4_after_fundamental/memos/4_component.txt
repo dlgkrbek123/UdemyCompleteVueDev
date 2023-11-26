@@ -1,0 +1,28 @@
+---------------------------------
+
+component
+=> 어플리케이션 구성을 위한 조각
+=> 페이지 섹션을 관리하기 쉽게함, 재사용성
+=> 데이터, 메소드, computed, watcher를 
+   가질 수 있는 템플릿
+
+---------------------------------
+
+마운트전에 컴포넌트를 생성해야 함
+
+let vm = Vue.createApp({  })
+vm.component('hello', {
+  data() {
+    return {
+      message: "Hello World!"
+    }
+  }
+  template: `<h1>{{ message }}</h1>`
+});
+vm.mount("#app");
+
+<hello></hello>
+<hello></hello>
+<hello></hello>
+
+---------------------------------

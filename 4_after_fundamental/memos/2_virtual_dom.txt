@@ -1,0 +1,50 @@
+---------------------------------
+
+virtual dom
+=> 자바스크립트 객체
+=> 실제 DOM의 경량화된 copy
+=> 비교와 업데이트가 실제 DOM에 하는것보다 빠름
+
+dom을 이용해 화면을 업데이트해왔다.
+=> 기본적으로 빠른데 요소가 많으면 느려진다.
+=> 어떤 것이 업데이트 됬는지 찾는 과정이 오래 걸림
+=> 전체가 아닌 필요한 부분만 업데이트되면 더 효율적
+
+---------------------------------
+
+vue는 템플릿을 컴파일함
+=> 템플릿 문자 -> 객체
+=> 관리, 성능향상
+
+
+<h1 class="blue">
+  Hello World
+</h1>
+
+{
+  tag: 'h1',
+  attributes: {
+    class: "blue"
+  },
+  content: ["Hello World"]
+}
+
+---------------------------------
+
+reactivity
+=> 프로그램이 변화에 반응
+=> data가 변하면 문서가 업데이트
+=> Vue는 아래와 같은 기법으로 구현
+
+const data = {
+  name: 'Luis'
+}
+const observed = new Proxy(data, {
+  set(target, key, value) {
+    document.querySelector("#name").innerText = value;
+    target[key] = value; // 기본동작
+  }
+})
+observed.name = 'john'
+
+---------------------------------
