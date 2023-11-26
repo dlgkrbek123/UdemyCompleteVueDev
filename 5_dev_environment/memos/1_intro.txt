@@ -1,0 +1,61 @@
+---------------------------------
+
+기존의 script태그에서 처리하는 방식은 
+간단하나 대형 프로젝트에는 부적합
+
+툴링을 통해 프로젝트 구성
+
+---------------------------------
+
+vite
+=> module bundler
+=> js, 이미지
+=> 배포전에 최적화, 압축
+=> 관리를 위해 파일을 나눠서 관리하나,
+   유저가 여러개를 다운받게 할 필욘없다.
+
+=> vite가 webpack보다 성능이 좋음
+=> 서드파티 라이브러리 지원
+=> extendable
+=> 설정이 쉬움
+
+> npm create vite@latest
+> npm run build
+  => dist 디렉토리 생성
+
+---------------------------------
+
+sass
+=> css를 위한 프로그래밍 언어(css를 확장)
+=> 전처리 언어로 css로 컴파일되어야 함
+=> 브라우저가 지원하지 않음
+
+> npm install sass
+
+=> vite에 의해 .scss파일 import 가능
+=> 함수, 믹스인, 변수, nesting
+
+---------------------------------
+
+postcss
+=> javascript로 쓰인 라이브러리
+=> css를 객체로 컴파일하고 다시 css로 컴파일
+=> js가 css와 상호작용가능하게 할 수 있음
+=> css를 작성후 변경 가능
+
+
+> npm install autoprefixer --save-dev
+> mkdir postcss.config.cjs
+=> 설정파일
+
+module.exports = {
+  plugins: [require('autoprefixer')]
+}
+
+---------------------------------
+
+webpack
+=> 산업표준인 모듈번들러
+=> webpack.config.js
+
+---------------------------------
